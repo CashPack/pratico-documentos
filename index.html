@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prático Documentos Online - Escrituras Rápidas e Econômicas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(180deg, #eff6ff 0%, #ffffff 50%, #eff6ff 100%);
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    /* Header */
+    header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 1rem 0;
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo-icon {
+      font-size: 2rem;
+    }
+    .logo-text h1 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #2563eb;
+      margin: 0;
+    }
+    .logo-text p {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin: 0;
+    }
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #1f2937;
+    }
+    .hero h1 span {
+      color: #2563eb;
+    }
+    .hero-subtitle {
+      font-size: 2.25rem;
+      font-weight: bold;
+      color: #2563eb;
+      margin-bottom: 1rem;
+    }
+    .hero-disclaimer {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+    .hero p {
+      font-size: 1.125rem;
+      color: #4b5563;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .btn {
+      padding: 1rem 3rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      font-size: 1.125rem;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-green {
+      background: #22c55e;
+      color: white;
+    }
+    .btn-green:hover {
+      background: #16a34a;
+    }
+    .btn-blue {
+      background: #2563eb;
+      color: white;
+    }
+    .btn-blue:hover {
+      background: #1d4ed8;
+    }
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 768px;
+      margin: 3rem auto 0;
+    }
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2.25rem;
+      font-weight: bold;
+      color: #2563eb;
+    }
+    .stat-label {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    /* Calculator */
+    .calculator {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      padding: 3rem 2rem;
+      max-width: 800px;
+      margin: 2rem auto 4rem;
+      text-align: center;
+    }
+    .calculator h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .calculator p {
+      color: #4b5563;
+      margin-bottom: 2rem;
+    }
+    .calculator-form {
+      display: grid;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .calculator-input, .calculator-select {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #d1d5db;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+    .calculator-btn {
+      width: 100%;
+      background: #2563eb;
+      color: white;
+      padding: 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      font-size: 1.25rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .calculator-btn:hover {
+      background: #1d4ed8;
+    }
+    .result {
+      display: none;
+      background: #f0fdf4;
+      border: 2px solid #86efac;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .result-item div:first-child {
+      font-size: 0.875rem;
+      color: #374151;
+    }
+    .result-item div:last-child {
+      font-size: 1.125rem;
+      font-weight: bold;
+      color: #2563eb;
+    }
+    .result-item .price {
+      font-size: 1.5rem;
+      color: #16a34a;
+    }
+    /* Benefits */
+    .benefits {
+      background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+      border-radius: 1.5rem;
+      padding: 4rem 2rem;
+      margin-bottom: 4rem;
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+    }
+    .benefits h2 {
+      font-size: 2.25rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .benefit-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .benefit-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .benefit-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+    }
+    .benefit-desc {
+      color: #6b7280;
+      line-height: 1.5;
+    }
+    /* Footer */
+    footer {
+      background: #1f2937;
+      color: white;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    /* WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #22c55e;
+      color: white;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      font-size: 2.5rem;
+      animation: bounce 2s infinite;
+      text-decoration: none;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    /* Responsive */
+    @media (min-width: 768px) {
+      .hero-buttons {
+        flex-direction: row;
+      }
+      .stats {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .result-grid {
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-icon">📋</div>
+          <div class="logo-text">
+            <h1>Prático Documentos</h1>
+            <p>Online</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>
+        Escrituras Rápidas e<br>
+        <span>Econômicas</span>
+      </h1>
+      <div class="hero-subtitle">Economia de até 70% na sua escritura</div>
+      <p class="hero-disclaimer">*A economia varia de acordo com o estado e valor do imóvel. Consulte condições específicas.</p>
+      
+      <p>
+        Plataforma digital que conecta corretores, compradores, vendedores e cartórios parceiros. 
+        Obtenha sua escritura em até 2 dias, na maioria dos casos no mesmo dia!
+      </p>
+
+      <div class="hero-buttons">
+        <a href="https://wa.me/5522997303566?text=Olá!%20Quero%20saber%20mais%20sobre%20a%20economia%20na%20escritura" 
+           target="_blank" 
+           class="btn btn-green">
+          💬 Fale Conosco no WhatsApp
+        </a>
+        <a href="#corretores" class="btn btn-blue">
+          Seja um Parceiro Corretor
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-value">2h</div>
+          <div class="stat-label">Média de Entrega</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">+1.2k</div>
+          <div class="stat-label">Corretores Parceiros</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">70%</div>
+          <div class="stat-label">Economia Máxima</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Digital</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section class="container">
+    <div class="calculator">
+      <h2>Calcule Sua Economia</h2>
+      <p>Veja quanto você pode economizar na sua escritura com a Prático</p>
+      
+      <div class="calculator-form">
+        <select id="estado" class="calculator-select">
+          <option value="SP">São Paulo</option>
+          <option value="RJ">Rio de Janeiro</option>
+          <option value="MG">Minas Gerais</option>
+          <option value="PR">Paraná</option>
+          <option value="RS">Rio Grande do Sul</option>
+        </select>
+        
+        <input type="text" id="valorImovel" placeholder="R$ 0,00" class="calculator-input">
+        
+        <button class="calculator-btn" onclick="calcularEconomia()">
+          Calcular Economia
+        </button>
+      </div>
+
+      <div id="resultado" class="result">
+        <div class="result-grid">
+          <div class="result-item">
+            <div>Custo Local</div>
+            <div id="custoLocal"></div>
+          </div>
+          <div class="result-item">
+            <div>Custo Prático</div>
+            <div id="custoPratico"></div>
+          </div>
+          <div class="result-item">
+            <div>Economia</div>
+            <div id="economiaValor" class="price"></div>
+            <div id="economiaPct"></div>
+          </div>
+        </div>
+        <p style="font-size: 0.75rem; color: #6b7280; margin-top: 1rem;">
+          *Os valores são estimativas. O valor final pode variar conforme as particularidades do caso.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="corretores" class="container">
+    <div class="benefits">
+      <h2>O Braço Direito do Corretor Moderno</h2>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">💰</div>
+          <h3 class="benefit-title">Comissões Extras</h3>
+          <p class="benefit-desc">Ganhe comissões adicionais em cada escritura realizada através da Prático.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📉</div>
+          <h3 class="benefit-title">Economia até 70%</h3>
+          <p class="benefit-desc">Ofereça aos seus clientes economia significativa nas escrituras.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">⚡</div>
+          <h3 class="benefit-title">Processo Rápido</h3>
+          <p class="benefit-desc">Escrituras obtidas em até 2 dias. Agilidade que impressiona.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🤝</div>
+          <h3 class="benefit-title">Suporte Completo</h3>
+          <p class="benefit-desc">Equipe dedicada para auxiliar em todas as etapas do processo.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🚀</div>
+          <h3 class="benefit-title">Tecnologia Avançada</h3>
+          <p class="benefit-desc">Plataforma digital com IA para extração automática de dados.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🎯</div>
+          <h3 class="benefit-title">Leads Qualificados</h3>
+          <p class="benefit-desc">Clientes individuais direcionados para corretores parceiros.</p>
+        </div>
+      </div>
+
+      <a href="https://wa.me/5522997303566?text=Quero%20ser%20um%20corretor%20parceiro" 
+         target="_blank" 
+         class="btn btn-green" style="margin-bottom: 1rem;">
+        CADASTRAR COMO CORRETOR PARCEIRO
+      </a>
+      <p style="font-size: 0.875rem; color: #6b7280;">Vagas limitadas por região</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="font-size: 0.875rem; color: #9ca3af; margin-bottom: 2rem;">
+        © 2026 PRÁTICO DOCUMENTOS ONLINE LTDA. Todos os direitos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/5522997303566?text=Olá!%20Tenho%20alguma%20dúvida" 
+     target="_blank" 
+     class="whatsapp-float">
+    💬
+  </a>
+
+  <script>
+    function calcularEconomia() {
+      const valorImovelInput = document.getElementById('valorImovel').value;
+      const estado = document.getElementById('estado').value;
+      
+      const valor = parseFloat(valorImovelInput.replace(/[^0-9,.]/g, ''));
+      if (!valor || valor <= 0) {
+        alert('Por favor, informe um valor válido');
+        return;
+      }
+      
+      const taxas = {
+        'SP': { custoLocal: 0.035, custoParceiro: 0.012 },
+        'RJ': { custoLocal: 0.040, custoParceiro: 0.013 },
+        'MG': { custoLocal: 0.038, custoParceiro: 0.012 },
+        'PR': { custoLocal: 0.036, custoParceiro: 0.011 },
+        'RS': { custoLocal: 0.034, custoParceiro: 0.011 },
+      };
+      
+      const dados = taxas[estado] || taxas['SP'];
+      const custoLocal = valor * dados.custoLocal;
+      const custoParceiro = valor * dados.custoParceiro;
+      const economiaValor = custoLocal - custoParceiro;
+      const economiaPct = (economiaValor / custoLocal) * 100;
+      
+      document.getElementById('custoLocal').textContent = custoLocal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('custoPratico').textContent = custoParceiro.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('economiaValor').textContent = economiaValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('economiaPct').textContent = '(' + economiaPct.toFixed(1) + '%)';
+      document.getElementById('resultado').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
